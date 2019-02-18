@@ -1,0 +1,12 @@
+version: '3'
+
+services: 
+  anon-chat:
+    container_name: anon-chat
+    build: .
+    command: ["./anon-chat"]
+    working_dir: /go/src/anon-chat
+    volumes: 
+      - .:/go/src/anon-chat
+    ports: 
+      - "8000:8000"
