@@ -6,9 +6,9 @@ WORKDIR /go/src/anon-chat
 ADD . /go/src/anon-chat
 
 # Install go project dependencies
-RUN go get ./... && \
+RUN go get -d -v ./... && \
     go build
 
 EXPOSE 8000
 
-CMD ["./anon-chat"]
+CMD ["anon-chat"]
