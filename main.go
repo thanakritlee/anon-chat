@@ -2,8 +2,8 @@ package main
 
 import (
 	"anon-chat/router"
+	"log"
 
-	"fmt"
 	"net/http"
 	"os"
 )
@@ -16,8 +16,9 @@ func main() {
 		port = "8000"
 	}
 
+	log.Printf("http server started on :%s\n", port)
 	err := http.ListenAndServe(":"+port, router)
 	if err != nil {
-		fmt.Print(err)
+		log.Fatal("ListenAndServe: ", err)
 	}
 }
