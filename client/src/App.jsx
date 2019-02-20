@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Container } from 'reactstrap';
 import './App.css';
 
-import { NavLink, Route } from 'react-router-dom';
-import axios from 'axios';
+import SendMessageForm from './components/SendMessageForm/SendMessageForm';
+import MessageList from './components/MessageList/MessageList'
 
-import Home from './pages/home/home';
-import About from './pages/about/about';
+import axios from 'axios';
 
 class App extends Component {
 
-  state = {
-    helloworld: "",
-    username: "",
-    messages: [],
-    currentMessage: ""
-  };
+  constructor() {
+    // Must call super, if using a stateful component.
+    super();
+    this.state = {
+      username: "",
+      messages: []
+    };
+
+    this.sendMessage = this.sendMessage.bind(this);
+  }
 
   componentDidMount() {
     var self = this;
@@ -28,56 +31,42 @@ class App extends Component {
     });
 
     // GET uuid username.
-    axios.get("http://localhost:8000/api/uuid")
+    axios.get("http://localhost:8000/api/username")
     .then(res => {
       const username = res.data.message;
       this.setState({ username });
+    })
+
+    // GET chat history.
+    axios.get("http://localhost:8000/api/chat-history")
+    .then(res => {
+      const messages = res.data.messages;
+      this.setState({ messages });
     })
 
     // Listen to websocket.
     this.ws = new WebSocket("ws://localhost:8000/api/ws");
     this.ws.addEventListener("message", (e) => {
       const msg = JSON.parse(e.data);
-      const message = {username: msg.username, message: msg.message};
+      const message = {username: msg.username, message: msg.message, timestamp: msg.timestamp};
       const messages = this.state.messages;
       messages.push(message);
-      console.log(messages);
       this.setState({ messages });
-    });
-    this.toggleSendMessage = this.toggleSendMessage.bind(this);
-    this.messageOnChange = this.messageOnChange.bind(this);
+    });    
   }
 
-  messageOnChange(message) {
-    message = message.currentTarget.value;
+  sendMessage(message) {
     const currentMessage = {username: this.state.username, message: message};
-    this.setState({ currentMessage });
-  }
-
-  toggleSendMessage() {
-    this.ws.send(JSON.stringify(this.state.currentMessage));
-    this.setState({ currentMessage: {} });
+    this.ws.send(JSON.stringify(currentMessage));
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          {this.state.helloworld}
-          <br/>
-          {this.state.username}
-          <br/>
-          <NavLink exact to="/home">Home</NavLink>
-          <br/>
-          <NavLink exact to="/about">About</NavLink>
-          <br/>
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/about" component={About} />
-          <br/>
-          <input type="text" name="message" onChange={this.messageOnChange}/>
-          <br/>
-          <button onClick={this.toggleSendMessage}>Send</button>
-        </header>
+        <Container fluid>
+          <MessageList messages={this.state.messages} />
+          <SendMessageForm sendMessage={this.sendMessage}/>
+        </Container>
       </div>
     );
   }
