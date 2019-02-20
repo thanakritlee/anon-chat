@@ -3,8 +3,10 @@ package router
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"anon-chat/controllers"
+	"anon-chat/models"
 	u "anon-chat/utils"
 
 	"github.com/gorilla/mux"
@@ -15,16 +17,10 @@ import (
 var clients = make(map[*websocket.Conn]bool)
 
 // A broadcast channel.
-var broadcast = make(chan Message)
+var broadcast = make(chan models.Message)
 
 // Configure a WebSocket upgrader.
 var upgrader = websocket.Upgrader{}
-
-// Message - a struct for a chat message.
-type Message struct {
-	Username string `json:"username"`
-	Message  string `json:"message"`
-}
 
 // GetRouter - return a router with registered routes.
 func GetRouter() *mux.Router {
@@ -40,7 +36,9 @@ func GetRouter() *mux.Router {
 
 	router.HandleFunc("/api/hello", HelloWorld).Methods("GET")
 
-	router.HandleFunc("/api/uuid", controllers.GenerateUUID).Methods("GET")
+	router.HandleFunc("/api/username", controllers.GenerateUUID).Methods("GET")
+
+	router.HandleFunc("/api/chat-history", controllers.GetChatHistory).Methods("GET")
 
 	router.HandleFunc("/api/ws", HandleWebSocketConnection).Methods("GET")
 	go HandleWebSocketMessage()
@@ -71,7 +69,7 @@ func HandleWebSocketConnection(w http.ResponseWriter, r *http.Request) {
 	clients[ws] = true
 
 	for {
-		var msg Message
+		var msg models.MessageIn
 		// Read in a new message as a JSON and map it to a Message go object.
 		err := ws.ReadJSON(&msg)
 		if err != nil {
@@ -80,8 +78,19 @@ func HandleWebSocketConnection(w http.ResponseWriter, r *http.Request) {
 			// Breaks the for loop and returns the function.
 			break
 		}
+
+		// Create a Message Go object from incoming message.
+		message := models.Message{
+			Message:   msg.Message,
+			Username:  msg.Username,
+			Timestamp: time.Now().Unix(),
+		}
+
+		// Store the message to a database.
+		message.Store()
+
 		// Send the recieved message to the broadcast channel.
-		broadcast <- msg
+		broadcast <- message
 	}
 }
 
