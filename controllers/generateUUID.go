@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	u "anon-chat/utils"
@@ -13,5 +12,7 @@ import (
 func GenerateUUID(w http.ResponseWriter, r *http.Request) {
 	// Creating UUID Version 4
 	id := uuid.Must(uuid.NewV4())
-	u.Response(w, u.Message(fmt.Sprintf("%s", id)))
+	res := u.Message("success")
+	res["username"] = id
+	u.Response(w, res)
 }
