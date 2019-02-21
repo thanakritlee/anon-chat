@@ -11,6 +11,7 @@ type Message struct {
 	gorm.Model
 	Username  string `json:"username"`
 	Message   string `json:"message"`
+	Colour    string `json:"colour"`
 	Timestamp int64  `json:"timestamp"`
 }
 
@@ -18,6 +19,7 @@ type Message struct {
 type MessageIn struct {
 	Username string `json:"username"`
 	Message  string `json:"message"`
+	Colour   string `json:"colour"`
 }
 
 // Store - store a message Go object to the Database.

@@ -38,6 +38,8 @@ func GetRouter() *mux.Router {
 
 	router.HandleFunc("/api/username", controllers.GenerateUUID).Methods("GET")
 
+	router.HandleFunc("/api/colour", controllers.GenerateColour).Methods("GET")
+
 	router.HandleFunc("/api/chat-history", controllers.GetChatHistory).Methods("GET")
 
 	router.HandleFunc("/api/ws", HandleWebSocketConnection).Methods("GET")
