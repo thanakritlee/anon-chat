@@ -1,3 +1,44 @@
 .App {
-  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.AppHeader {
+  background-color: #6e6e6e;
+  overflow: visible;
+  width: 100%;
+  text-align: center;
+  color: white;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+*:focus {
+  outline: none;
+}
+
+/* html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; 
+} */
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(207, 207, 207); 
 }

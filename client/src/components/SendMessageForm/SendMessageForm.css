@@ -1,0 +1,32 @@
+form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0.5rem auto 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+input {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 8px;
+  flex-grow: 1;
+  border: none;
+  background-color: #e2e2e2;
+  color: black;
+}
+
+input ::placeholder {
+  color: #8f8f8f;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #737cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-left: 10px;
+}

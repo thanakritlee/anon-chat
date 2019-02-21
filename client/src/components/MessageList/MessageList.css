@@ -1,0 +1,66 @@
+.MessagesList {
+  padding: 20px 0;
+  width: 100%;
+  margin: 0 auto;
+  list-style: none;
+  padding-left: 0;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.Message {
+  display: flex;
+  margin-top: 30px;
+}
+
+.CurrentUser {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.MessageContent {
+  display: inline-block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.CurrentUser > .MessageContent {
+  align-items: flex-end;
+}
+
+.CurrentUser > .MessageContent .MessageText {
+  background-color: lightcoral;
+}
+
+.UserColour {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 10px -10px;
+  flex: 0 0 35px;
+}
+
+.MessageContent > .Username {
+  display: block;
+  color: gray;
+  font-size: 14px;
+  padding-bottom: 4px;
+}
+
+.MessageContent > .MessageText {
+  padding: 10px;
+  max-width: 400px;
+  margin: 0;
+  border-radius: 12px;
+  background-color: lightblue;
+  color: white;
+  display: inline-block;
+}
+
+.MessageContent > .MessageTime {
+  display: block;
+  color: grey;
+  font-size: 14px;
+  padding-bottom: 4px;
+}

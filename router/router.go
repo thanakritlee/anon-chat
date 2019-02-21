@@ -27,11 +27,16 @@ func GetRouter() *mux.Router {
 	router := mux.NewRouter()
 
 	// Serve static files.
-	router.PathPrefix("/static").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./client//build/static"))))
+	router.PathPrefix("/static").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./client/build/static"))))
 
 	// Serve index page on root.
 	router.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./client/build/index.html")
+	}))
+
+	// Serve favicon.ico
+	router.Handle("/favicon.ico", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./client/build/favicon.ico")
 	}))
 
 	router.HandleFunc("/api/hello", HelloWorld).Methods("GET")
@@ -85,6 +90,7 @@ func HandleWebSocketConnection(w http.ResponseWriter, r *http.Request) {
 		message := models.Message{
 			Message:   msg.Message,
 			Username:  msg.Username,
+			Colour:    msg.Colour,
 			Timestamp: time.Now().Unix(),
 		}
 
