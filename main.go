@@ -13,7 +13,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8000"
+		port = "80"
 	}
 
 	log.Printf("http server started on :%s\n", port)

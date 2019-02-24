@@ -11,7 +11,7 @@ services:
     volumes: 
       - .:/go/src/anon-chat
     ports: 
-      - "8000:8000"
+      - "80:80"
     depends_on:
       - "postgres"
     links: 
