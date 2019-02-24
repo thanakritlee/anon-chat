@@ -6,11 +6,11 @@
 }
 
 .AppHeader {
-  background-color: #6e6e6e;
+  background-color: #f1f1f1;
   overflow: visible;
   width: 100%;
   text-align: center;
-  color: white;
+  color: #8f8f8f;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
