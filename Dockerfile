@@ -9,6 +9,6 @@ ADD . /go/src/anon-chat
 RUN go get -d -v ./... && \
     go build
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["anon-chat"]
