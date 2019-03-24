@@ -7,8 +7,6 @@ import MessageList from './components/MessageList/MessageList'
 
 import axios from 'axios';
 
-const IP = process.env.IP;
-
 class App extends Component {
 
   constructor() {
@@ -26,6 +24,7 @@ class App extends Component {
 
   componentDidMount() {
     var self = this;
+    const IP = process.env.IP;
 
     // GET uuid username.
     axios.get("http://" + IP + ":3001/api/username")
