@@ -17,7 +17,7 @@ func main() {
 	}
 
 	log.Printf("http server started on :%s\n", port)
-	err := http.ListenAndServe(":"+port, router)
+	err := http.ListenAndServeTLS(":"+port, "./host.crt", "./host.key", router)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
