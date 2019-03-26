@@ -1,8 +1,9 @@
 package main
 
 import (
-	"anon-chat/router"
 	"log"
+
+	"github.com/thanakritlee/anon-chat/router"
 
 	"net/http"
 	"os"

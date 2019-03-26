@@ -6,10 +6,8 @@ services:
     build: .
     environment: 
       - TZ=Asia/Bangkok
-    command: ["./anon-chat"]
-    working_dir: /go/src/anon-chat
-    volumes: 
-      - .:/go/src/anon-chat
+    working_dir: /app
+    command: ["sh", "/app/anon-chat"]
     ports: 
       - "3001:3001"
     depends_on:
@@ -19,7 +17,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:11.2-alpine
     environment: 
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password

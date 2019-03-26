@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"anon-chat/controllers"
-	"anon-chat/models"
-	u "anon-chat/utils"
+	"github.com/thanakritlee/anon-chat/controllers"
+	"github.com/thanakritlee/anon-chat/models"
+	u "github.com/thanakritlee/anon-chat/utils"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"

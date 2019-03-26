@@ -1,14 +1,24 @@
-FROM golang:1.10
+# build stage
+FROM golang:1.12 as builder
 
-RUN mkdir -p go/src/anon-chat
-WORKDIR /go/src/anon-chat
+WORKDIR /app
 
-ADD . /go/src/anon-chat
+COPY go.mod .
+COPY go.sum .
 
-# Install go project dependencies
-RUN go get -d -v ./... && \
-    go build
+RUN go mod download
+
+COPY . .
+
+RUN go build -o anon-chat
+
+# final stage
+FROM alpine:3.9.2
+
+WORKDIR /app
+
+COPY --from=builder /app/anon-chat /app/
 
 EXPOSE 3001
 
-CMD ["anon-chat"]
+ENTRYPOINT ["/app/anon-chat"]

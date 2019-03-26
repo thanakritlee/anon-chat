@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	u "anon-chat/utils"
+	u "github.com/thanakritlee/anon-chat/utils"
 )
 
 // GenerateColour - a controller for generating and return a random colour.

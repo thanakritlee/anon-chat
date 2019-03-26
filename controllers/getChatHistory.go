@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"anon-chat/models"
-	u "anon-chat/utils"
+	"github.com/thanakritlee/anon-chat/models"
+	u "github.com/thanakritlee/anon-chat/utils"
 )
 
 // GetChatHistory - a controller for getting the chat history from the database.
