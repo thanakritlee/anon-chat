@@ -3,11 +3,12 @@ version: '3'
 services: 
   anon-chat:
     container_name: anon-chat
-    build: .
+    # build: .
+    image: anon-chat:v1.0.0
     environment: 
       - TZ=Asia/Bangkok
     working_dir: /app
-    command: ["sh", "/app/anon-chat"]
+    command: ["/app/anon-chat"]
     ports: 
       - "3001:3001"
     depends_on:
