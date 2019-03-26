@@ -24,17 +24,13 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o anon-chat
 
 # Final stage
-FROM alpine:3.9.2
+FROM scratch
 
 WORKDIR /app
 
 COPY --from=builder /app/anon-chat /app/
 COPY --from=builder /app/.env /app/
 COPY --from=clientbuilder /app/client/build /app/client/build
-
-RUN pwd
-RUN ls
-RUN ls client/build
 
 EXPOSE 3001
 

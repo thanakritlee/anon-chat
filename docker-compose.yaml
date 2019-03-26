@@ -4,7 +4,7 @@ services:
   anon-chat:
     container_name: anon-chat
     # build: .
-    image: anon-chat:v1.0.0
+    image: anon-chat:v1.1.0
     environment: 
       - TZ=Asia/Bangkok
     working_dir: /app
