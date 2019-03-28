@@ -26,28 +26,28 @@ class App extends Component {
     const IP = "localhost";
 
     // GET uuid username.
-    axios.get("http://" + IP + ":3001/api/username")
+    axios.get(`/api/username`)
     .then(res => {
       const username = res.data.username;
       this.setState({ username });
     });
 
     // GET user colour.
-    axios.get("http://" + IP + ":3001/api/colour")
+    axios.get(`/api/colour`)
     .then(res => {
       const colour = res.data.colour;
       this.setState({ colour });
     });
 
     // GET chat history.
-    axios.get("http://" + IP + ":3001/api/chat-history")
+    axios.get(`/api/chat-history`)
     .then(res => {
       const messages = res.data.messages;
       this.setState({ messages });
     });
 
     // Listen to websocket.
-    this.ws = new WebSocket("ws://" + IP + ":3001/api/ws");
+    this.ws = new WebSocket(`/api/ws`);
     this.ws.addEventListener("message", (e) => {
       const msg = JSON.parse(e.data);
       const message = { username: msg.username, message: msg.message, timestamp: msg.timestamp, colour: msg.colour };
