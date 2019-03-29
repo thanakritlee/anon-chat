@@ -47,14 +47,14 @@ class App extends Component {
     });
 
     // Listen to websocket.
-    this.ws = new WebSocket(`/api/ws`);
-    this.ws.addEventListener("message", (e) => {
-      const msg = JSON.parse(e.data);
-      const message = { username: msg.username, message: msg.message, timestamp: msg.timestamp, colour: msg.colour };
-      const messages = this.state.messages;
-      messages.push(message);
-      this.setState({ messages });
-    });    
+    // this.ws = new WebSocket(`/api/ws`);
+    // this.ws.addEventListener("message", (e) => {
+    //   const msg = JSON.parse(e.data);
+    //   const message = { username: msg.username, message: msg.message, timestamp: msg.timestamp, colour: msg.colour };
+    //   const messages = this.state.messages;
+    //   messages.push(message);
+    //   this.setState({ messages });
+    // });    
   }
 
   sendMessage(message) {
