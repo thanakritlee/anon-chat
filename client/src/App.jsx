@@ -47,14 +47,19 @@ class App extends Component {
     });
 
     // Listen to websocket.
+    // const protocolPrefix = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const protocolPrefix = 'ws:';
+    let { host } = window.location; // nb: window location contains the port, so host will be localhost:3000 in dev
+    this.ws = new WebSocket(`${protocolPrefix}//${host}/ws`); // dbstates is my websocket route
+
     // this.ws = new WebSocket(`/api/ws`);
-    // this.ws.addEventListener("message", (e) => {
-    //   const msg = JSON.parse(e.data);
-    //   const message = { username: msg.username, message: msg.message, timestamp: msg.timestamp, colour: msg.colour };
-    //   const messages = this.state.messages;
-    //   messages.push(message);
-    //   this.setState({ messages });
-    // });    
+    this.ws.addEventListener("message", (e) => {
+      const msg = JSON.parse(e.data);
+      const message = { username: msg.username, message: msg.message, timestamp: msg.timestamp, colour: msg.colour };
+      const messages = this.state.messages;
+      messages.push(message);
+      this.setState({ messages });
+    });    
   }
 
   sendMessage(message) {
