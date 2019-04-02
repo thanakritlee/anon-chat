@@ -22,8 +22,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // const IP = process.env.IP;
-    const IP = "localhost";
 
     // GET uuid username.
     axios.get(`/api/username`)
@@ -75,6 +73,11 @@ class App extends Component {
       <div className="App">
         <div className="AppHeader">
           <h3>Anon Chat</h3>
+          <img src="https://travis-ci.com/thanakritlee/anon-chat.svg?branch=master" alt="" style={{ paddingBottom:"1rem" }}
+          />
+        </div>
+        <div className="AppHeader">
+          
         </div>
           <MessageList messages={this.state.messages} username={this.state.username} focusForm={this.focusForm} />
           <SendMessageForm sendMessage={this.sendMessage} inputRef={ref => {this.SendMessageFormComponent = ref}} />
